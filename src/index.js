@@ -24,9 +24,9 @@ client.on('interactionCreate', (interaction) => {
 
     if(interaction.commandName === 'decide'){
         let decision = Math.round(Math.random());
-        q1 = interaction.options.get('question')?.value;
+        let q1 = interaction.options.get('question')?.value;
         
-        q2 = q1.replaceAll('?', '');
+        let q2 = q1.replaceAll('?', '');
         
         let gif = [
             'https://media.giphy.com/media/IRzsRinQNCsPm/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g',
