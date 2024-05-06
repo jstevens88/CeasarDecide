@@ -24,7 +24,9 @@ client.on('interactionCreate', (interaction) => {
 
     if(interaction.commandName === 'decide'){
         let decision = Math.round(Math.random());
-        let q = interaction.options.get('question')?.value;
+        q1 = interaction.options.get('question')?.value;
+        
+        q2 = q1.replaceAll('?', '');
         
         let gif = [
             'https://media.giphy.com/media/IRzsRinQNCsPm/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g',
@@ -32,9 +34,9 @@ client.on('interactionCreate', (interaction) => {
         ];
 
         let reply = gif[decision];
-        console.log(q);
+        console.log(q2);
         console.log(reply);
-        interaction.reply(q+'[?]('+reply+')');
+        interaction.reply(q2+'[?]('+reply+')');
     }
 })
 
