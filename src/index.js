@@ -13,6 +13,7 @@ myIntents.add(
 
 
 const client = new Client({ intents: myIntents});
+client.login(process.env.DISCORD_TOKEN);
 
 client.on('ready', (c) => {
     console.log(`${c.user.tag} is online.`);
@@ -22,12 +23,21 @@ client.on('interactionCreate', (interaction) => {
     if(!interaction.isChatInputCommand()) return;
 
     if(interaction.commandName === 'decide'){
-        let decision = Math.round(Math.random())
-        let gif = ['https://media.giphy.com/media/IRzsRinQNCsPm/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g','https://media.giphy.com/media/3IpHeyAdAmjQI/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g']
-        interaction.reply(gif[decision])
+        let decision = Math.round(Math.random());
+        let q = interaction.options.get('question')?.value;
+        
+        let gif = [
+            'https://media.giphy.com/media/IRzsRinQNCsPm/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g',
+            'https://media.giphy.com/media/3IpHeyAdAmjQI/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g'
+        ];
+
+        let reply = gif[decision];
+        console.log(q);
+        console.log(reply);
+        interaction.reply(q+'[?]('+reply+')');
     }
 })
 
 
-client.login(process.env.DISCORD_TOKEN);
+
 
