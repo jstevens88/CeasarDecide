@@ -10,8 +10,6 @@ myIntents.add(
 const client = new Client({ intents: myIntents});
 client.login(process.env.DISCORD_TOKEN);
 
-
-var apiCounter = 0;
 async function callAPI(q, w){
     let data = '';
     const apiKEY = process.env.API_KEY;
@@ -35,7 +33,7 @@ client.on('messageCreate', (msg) =>{
     
         if(msg.author.bot) return
         if(msg.content.includes('wat')){
-            query = msg.content;
+            query = encodeURIComponent(msg.content);
             callAPI(query, 10).then(data => msg.reply(data));
         }
         else if(msg.content.includes('hwat')){
