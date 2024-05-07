@@ -1,8 +1,5 @@
 require('dotenv').config();
 const { Client, IntentsBitField } = require('discord.js');
-
-
-
 const myIntents = new IntentsBitField();
 myIntents.add(
     IntentsBitField.Flags.Guilds,
@@ -10,14 +7,53 @@ myIntents.add(
     IntentsBitField.Flags.GuildMessages,
     IntentsBitField.Flags.MessageContent
     );
-
-
 const client = new Client({ intents: myIntents});
 client.login(process.env.DISCORD_TOKEN);
+
+
+var apiCounter = 0;
+async function callAPI(q, w){
+    let data = '';
+    const apiKEY = '0ADdd87uFqaKJfpz8KsDBJw99MwanR0h';
+    let query = q;
+    let weird = w;
+    const apiURL = `https://api.giphy.com/v1/gifs/translate?api_key=${apiKEY}&s=${query}&weirdness=${weird}`;
+    console.log(apiURL)
+    const response = await fetch(apiURL);
+    const json = await response.json();
+    data = json.data.embed_url;
+    return data;
+}
+
+
 
 client.on('ready', (c) => {
     console.log(`${c.user.tag} is online.`);
 });
+
+client.on('messageCreate', (msg) =>{
+    
+        if(msg.author.bot) return
+        if(msg.content.includes('wat')){
+            query = msg.content;
+            callAPI(query, 10).then(data => msg.reply(data));
+        }
+        else if(msg.content.includes('hwat')){
+            query = encodeURIComponent(msg.content);
+            callAPI(query, 5).then(data => msg.reply(data));
+        }else if(msg.content.includes('what')){
+            query = encodeURIComponent(msg.content);
+            callAPI(query,0).then(data => msg.reply(data));
+        }
+        else if(msg.content.includes('oh no') || msg.content.includes('uh oh')){
+            query = encodeURIComponent(msg.content);
+            callAPI(query,10).then(data => msg.reply(data));
+        }
+    });
+        
+
+
+
 
 client.on('interactionCreate', (interaction) => {
     if(!interaction.isChatInputCommand()) return;
@@ -38,7 +74,7 @@ client.on('interactionCreate', (interaction) => {
         console.log(reply);
         interaction.reply(q2+'[?]('+reply+')');
     }
-})
+});
 
 
 
