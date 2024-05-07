@@ -14,7 +14,7 @@ client.login(process.env.DISCORD_TOKEN);
 var apiCounter = 0;
 async function callAPI(q, w){
     let data = '';
-    const apiKEY = '0ADdd87uFqaKJfpz8KsDBJw99MwanR0h';
+    const apiKEY = process.env.API_KEY;
     let query = q;
     let weird = w;
     const apiURL = `https://api.giphy.com/v1/gifs/translate?api_key=${apiKEY}&s=${query}&weirdness=${weird}`;
