@@ -30,8 +30,9 @@ client.on('ready', (c) => {
 });
 
 client.on('messageCreate', (msg) =>{
-    
-        if(msg.author.bot) return
+        if(msg.author.bot) return;
+
+
         if(msg.content.includes('wat')){
             query = encodeURIComponent(msg.content);
             callAPI(query, 10).then(data => msg.reply(data));
@@ -47,7 +48,7 @@ client.on('messageCreate', (msg) =>{
             query = encodeURIComponent(msg.content);
             callAPI(query,10).then(data => msg.reply(data));
         }
-    });
+});
         
 
 
@@ -58,9 +59,12 @@ client.on('interactionCreate', (interaction) => {
 
     if(interaction.commandName === 'decide'){
         let decision = Math.round(Math.random());
-        let q1 = interaction.options.get('question')?.value;
-        
-        let q2 = q1.replaceAll('?', '');
+        let q1 = interaction.options.get('question')?.value
+        let q2 = '';
+
+        if(q1 != undefined){
+            q2 = q1.replaceAll('?', '');
+        }
         
         let gif = [
             'https://media.giphy.com/media/IRzsRinQNCsPm/giphy.gif?cid=ecf05e47zradkpsyiet3m4ngpih52tafuzh70urp573utqo7&ep=v1_gifs_search&rid=giphy.gif&ct=g',
