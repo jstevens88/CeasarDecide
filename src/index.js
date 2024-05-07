@@ -11,16 +11,19 @@ const client = new Client({ intents: myIntents});
 client.login(process.env.DISCORD_TOKEN);
 
 async function callAPI(q, w){
-    let data = '';
     const apiKEY = process.env.API_KEY;
+    let data = '';
     let query = q;
     let weird = w;
     const apiURL = `https://api.giphy.com/v1/gifs/translate?api_key=${apiKEY}&s=${query}&weirdness=${weird}`;
-    console.log(apiURL)
+    console.log(apiURL);
+
+
     const response = await fetch(apiURL);
     const json = await response.json();
     data = json.data.embed_url;
     return data;
+    
 }
 
 
