@@ -8,9 +8,21 @@ const commands = [
         description: 'decides your fate',
         options: [
             {
-            name: 'question',
-            description: 'ask your question',
-            type: ApplicationCommandOptionType.String
+                name: 'question',
+                description: 'ask your question',
+                type: ApplicationCommandOptionType.String
+            }
+        ]
+    },
+    {
+        name: 'roll',
+        description: 'decides your fate',
+        options: [
+            {
+                name: 'rollstring',
+                description: 'Dice Notation -- Ex: roll d20 d4 2d6 adv',
+                type: ApplicationCommandOptionType.String,
+                required: true,
             }
         ]
     }
